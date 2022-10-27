@@ -2,13 +2,14 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
 
-//Route::get('contact/{age}',[ProfileController::class, 'contact']);
 
-//Route::prefix('profile')->middleware('auth')->group(function() {
-//    Route::get('/test', [ProfileController::class, 'test']);
-//    Route::get('/password/{pass?}', [ProfileController::class, 'password']);
-//});
+Auth::routes();
+
+Route::get('/home', [HomeController::class, 'index'])->name('home');
+
+Route::get('/go', [HomeController::class, 'go'])->name('go');
 
 Route::group(['prefix' => 'profile'], function () {
     Route::get('/test2/{x?}', [ProfileController::class, 'test2']);
@@ -17,6 +18,9 @@ Route::group(['prefix' => 'profile'], function () {
 });
 
 Route::get('contact',[ProfileController::class, 'contact'])->middleware('auth');
+
+
+
 //Route::get('login', function () {
 //   return 'You must log in';
 //})->name('login');
@@ -59,6 +63,4 @@ Route::get('contact',[ProfileController::class, 'contact'])->middleware('auth');
 
 
 
-Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
